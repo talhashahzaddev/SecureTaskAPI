@@ -11,8 +11,7 @@ public class AppDbContext : DbContext
     public DbSet<TaskItem> Tasks => Set<TaskItem>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        // Seed default users
+    { 
         modelBuilder.Entity<User>().HasData(
             new User
             {

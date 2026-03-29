@@ -22,7 +22,6 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginDto dto)
     {
-        // Find user by username
         var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == dto.Username);
 
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.Password))

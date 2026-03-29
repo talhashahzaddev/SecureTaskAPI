@@ -13,7 +13,7 @@ namespace SecureTaskManagement.Controllers;
 
 [ApiController]
 [Route("api/tasks")]
-[Authorize] // all endpoints require a valid JWT
+[Authorize] 
 public class TasksController : ControllerBase
 {
     private readonly AppDbContext _db;
@@ -23,17 +23,13 @@ public class TasksController : ControllerBase
     {
         _db = db;
         _hubContext = hubContext;
-    }
-
-    // Helper: get the logged-in user's ID from the JWT
+    } 
     private int GetUserId() =>
         int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
 
     private string GetUserRole() =>
         User.FindFirstValue(ClaimTypes.Role)!;
-
-    // GET /api/tasks
-    // Admin sees all tasks, User sees only their own
+     
     [HttpGet]
     public async Task<IActionResult> GetTasks()
     {
